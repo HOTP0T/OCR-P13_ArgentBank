@@ -1,7 +1,7 @@
 
 # Argent Bank API
 
-Welcome to the Argent Bank API repository. This project is part of an initiative to support Argent Bank, a start-up looking to establish its presence in the financial industry. The application allows users to securely access and manage their accounts online.
+Welcome to the Argent Bank API repository. This project is part of an initiative to support Argent Bank. The application allows users to securely access and manage their accounts online.
 
 ## 📖 Project Overview
 
@@ -56,14 +56,14 @@ Follow these steps to set up and run the application locally:
    ```bash
    npm run dev:server
    ```
-   The backend server will be available at `http://localhost:3000`.
+   The backend server will be available at `http://localhost:3001`.
 
 5. **Start the Frontend Application**  
    Launch the frontend application from the frontend directory:
    ```bash
    npm start
    ```
-   The frontend app will be available at `http://localhost:3001`.
+   The frontend app will be available at `http://localhost:3000`.
 
 ## 👥 Sample Users in Database
 
@@ -91,4 +91,3 @@ After running the `populate-db` script, you will have two users in the database:
 Thank you for checking out the Argent Bank API project. We hope this documentation helps you get started quickly. If you encounter any issues, feel free to open an issue on GitHub.
 
 ---
-**Note:** This README file follows best practices to ensure clarity and ease of setup for any new contributors.
