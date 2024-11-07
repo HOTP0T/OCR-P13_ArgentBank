@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/DashboardAccount/DashboardAccount.js</title>
+    <link rel="icon" href="../custom-template/assets/favicon.png" />  
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <p><img src="../custom-template/assets/logo.png" ></p>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useEffect, useState} from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { Link } from 'react-router-dom'
+
+import { profileSuccesful, profileFailed } from '../../features/featuresUser/actions/Action'
+import { accountsSuccesful, accountsFailed } from '../../features/featuresTransaction/actions/Action'
+import { profile } from '../../services/userService'
+import { accounts } from '../../services/transactionService'
+import EditNameForm from '../EditNameForm/EditNameForm'
+
+import '../../components/DashboardAccount/DashboardAccount.css'
+
+/**
+ * Component React which display the account's information of an user
+ * @component
+ */
+
+const DashboardAccount = () => {   
+      
+    /**
+     * Store the token's variable which is an empty object at first 
+     */
+    const [token, setToken] = useState('')
+
+    /**
+     * Store the user's variable which is empty for each object at first
+     */
+    const [user, setUser] = useState({firstName:'',lastName:''})
+
+    /**
+     * Store the data's account variables which is an empty array at first
+     */
+    const [accountDatas, setAccountDatas] = useState([])
+
+    /**
+     * When the component is mounted, it retrieve the token from the localStorage
+     * The second parameter is an empty array, so the useEffect is used only one time
+     */
+    useEffect(() => {
+        const tokenLocalStorage = JSON.parse(localStorage.getItem('token'))
+        
+        /**
+         * The token is updated in the state
+         */
+        if(tokenLocalStorage){
+            setToken(tokenLocalStorage)          
+        } 
+    },[])    
+       
+    /**
+     * The dispatch is used to send actions to the reducer
+     */
+    const dispatch = useDispatch()
+
+    /**
+     * useEffect is used to retrieve the datas from the user's service in asynchronous mode when dispatch or token changes
+     * also to retrieve the datas from the transaction service
+     * useEffect is trigerred when the valeur of dispatch and token change
+     */
+    useEffect(() => {
+        async function fetchUser (){
+            let userProfile = await profile (token)
+            if( userProfile != null ) {
+                dispatch(profileSuccesful(userProfile))
+                setUser(userProfile)
+            } else {
+                dispatch(profileFailed("User not found"))
+            }
+        }
+        async function fetchAccounts (){
+            let userAccounts = await accounts (token)
+            setAccountDatas(userAccounts)
+            if( userAccounts != null ) {
+                dispatch(accountsSuccesful(userAccounts))
+            } else {
+                dispatch(accountsFailed("User not found"))
+            }
+        }
+        if(token !== ''){
+            fetchUser()
+            fetchAccounts()
+        }        
+    }, [dispatch, token])    
+
+    /**
+     * Get the user profile from the state
+     */
+    const userStore = useSelector(state => state.user)  
+ 
+    /**
+     * useEffect is used to detect the change in the editName
+     */
+    useEffect(() => {
+        setUser(userStore)
+    },[userStore])
+    
+    /**
+     * Create one state to open and close modal editNameForm
+     */
+    const [modal, setModal] = useState(false)
+    const Toggle = () => setModal(!modal)   
+
+    return (
+        &lt;main className="mainAccount">
+            &lt;div className="header">
+                &lt;h1>Welcome back&lt;br />{ user.firstName } { user.lastName } !&lt;/h1>
+                &lt;button className="editButton" onClick={() => Toggle()}>
+                        Edit Name
+                &lt;/button>
+                &lt;EditNameForm show={ modal } close={ Toggle } />
+            &lt;/div>            
+
+            &lt;h2 className="srOnly">Accounts&lt;/h2>
+            &lt;section className="accountcontent">
+                { accountDatas.map((accountData) => (
+                    &lt;li key={accountData.accountId} className='accountList'>
+                        &lt;div className='info'>
+                            &lt;div className="accountContentWrapper">
+                            &lt;h3 className="accountTitle">{accountData.title}&lt;/h3>
+                            &lt;p className="accountAmount">{accountData.amount}&lt;/p>
+                            &lt;p className="accountAmountDescription">{accountData.description}&lt;/p>
+                            &lt;/div>
+                        &lt;/div>
+                        &lt;div className="accountContentWrapper cta">
+                            &lt;Link className="transactionButton" to={`/AccountPage/${accountData.accountId}`} >
+                                View transactions
+                            &lt;/Link>
+                        &lt;/div>
+                    &lt;/li>
+                ))}
+            &lt;/section>
+        &lt;/main>
+    )
+}
+
+export default DashboardAccount</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html"><img src="../custom-template/assets/logo.png" ></a></h2><h3>Global</h3><ul><li><a href="global.html#AccountPage">AccountPage</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#DashboardAccount">DashboardAccount</a></li><li><a href="global.html#DashboardHeader">DashboardHeader</a></li><li><a href="global.html#EditNameForm">EditNameForm</a></li><li><a href="global.html#Error404">Error404</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Homepage">Homepage</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignInForm">SignInForm</a></li><li><a href="global.html#TransactionDashboard">TransactionDashboard</a></li><li><a href="global.html#TransactionHeader">TransactionHeader</a></li><li><a href="global.html#accountsReducer">accountsReducer</a></li><li><a href="global.html#accountsSuccesful">accountsSuccesful</a></li><li><a href="global.html#allReducers">allReducers</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginReducer">loginReducer</a></li><li><a href="global.html#loginSuccesful">loginSuccesful</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#profileSuccesful">profileSuccesful</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#transactionsSuccesful">transactionsSuccesful</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateSuccesful">updateSuccesful</a></li><li><a href="global.html#userReducer">userReducer</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Feb 28 2023 13:56:53 GMT+0100 (GMT+01:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

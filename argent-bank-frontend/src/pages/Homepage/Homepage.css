@@ -1,0 +1,160 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.mainHomepage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    position: relative;
+    height: min-content;
+}  
+  
+.hero {
+    position: relative;
+    background-image: url("../../assets/bank-tree.jpeg");
+    background-position: 0 -205px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 400px;
+    width: 100%;
+}
+  
+.heroContent {
+    position: absolute;
+    margin-top: 7%;
+    margin-left: 65%;
+    margin-right: 5%;
+    height: auto;
+    width: auto;
+    background: white;
+    padding: 15px;
+    text-align: left;
+}
+
+.srOnly {
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important; /* 2 */
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+    white-space: nowrap !important; /* 3 */
+}
+
+.heroContent .subtitle {
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0;
+}
+  
+.heroContent .text {
+    margin-bottom: 0;
+    font-size: 20px;
+}
+
+@media (max-width: 885px){
+    .hero {
+        height: 300px;
+    }
+    .heroContent {
+        margin-left: 53%;
+        margin-right: 10%;
+    }
+    .heroContent .subtitle {
+        font-size: 20px;
+    }
+    .heroContent .text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 700px) {
+    .hero {
+        height: 230px;
+     }
+    .heroContent {
+        margin-top: 2%;
+    }
+    .heroContent .subtitle {
+        font-size: 18px;
+    }
+    .heroContent .text {
+        font-size: 14px;
+    } 
+}
+
+@media (max-width: 580px) {
+    .hero {
+        height: 160px;
+     }
+    .heroContent {
+        margin-top: 2%;
+        padding: 5px;
+    }
+    .heroContent .subtitle {
+        font-size: 14px;
+    }
+    .heroContent .text {
+        font-size: 10px;
+    } 
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 105px;
+     }
+    .heroContent .subtitle {
+        font-size: 10px;
+    }
+    .heroContent .text {
+        font-size: 10px;
+    } 
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    padding: 2rem;
+}
+  
+@media (min-width: 920px) {
+    .features {
+      flex-direction: row;
+    }
+}
+  
+.featureIcon {
+    width: 100px;
+    border: 10px solid #00bc77;
+    border-radius: 50%;
+    padding: 1rem;
+}
+  
+.featureItem {
+    flex: 1;
+    padding: 2.5rem;
+}
+
+@media (max-width: 885px) {
+    .featureItem {
+        padding: 20px;
+    }
+}
+  
+.featureItemTitle {
+    color: #222;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
