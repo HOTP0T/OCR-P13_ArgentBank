@@ -46,7 +46,7 @@ const DashboardAccount = () => {
             setToken(tokenLocalStorage)          
         } 
     },[])    
-       
+
     /**
      * The dispatch is used to send actions to the reducer
      */
@@ -84,9 +84,10 @@ const DashboardAccount = () => {
 
     /**
      * Get the user profile from the state
+     * I request which state i want to get with useSelector
      */
     const userStore = useSelector(state => state.user)  
- 
+
     /**
      * useEffect is used to detect the change in the editName
      */
