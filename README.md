@@ -88,6 +88,4 @@ After running the `populate-db` script, you will have two users in the database:
   - **Edit User Name**: `/designs/wireframes/edit-user-name.png`
   - **Transactions Model**: `/designs/wireframes/transactions.png`
 
-Thank you for checking out the Argent Bank API project. We hope this documentation helps you get started quickly. If you encounter any issues, feel free to open an issue on GitHub.
-
 ---
