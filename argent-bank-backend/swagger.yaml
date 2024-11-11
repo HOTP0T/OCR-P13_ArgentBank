@@ -202,6 +202,8 @@ paths:
           description: Internal Server Error
   /transactions/{transactionId}:
     put:
+      security:
+        - Bearer: []
       tags:
         - Transaction Module
       summary: Update transaction
@@ -239,6 +241,8 @@ paths:
         '500':
           description: Internal Server Error
     delete:
+      security:
+        - Bearer: []
       tags:
         - Transaction Module
       summary: Delete transaction
