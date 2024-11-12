@@ -21,7 +21,7 @@ export async function transaction( accountId ) {
     transactions = userTransactionsData.body.transactions
 
     let transactionsByAccountId = transactions.filter(transaction => {
-           
+
             return transaction.accountId === accountId}
         )
 
