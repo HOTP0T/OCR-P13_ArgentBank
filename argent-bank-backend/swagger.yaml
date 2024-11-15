@@ -115,6 +115,8 @@ paths:
   
   /accounts:
     get:
+      security:
+        - Bearer: []
       tags:
         - Account Module
       summary: User's accounts API
@@ -141,21 +143,61 @@ paths:
           
   /transactions:
     get:
+      security:
+        - Bearer: []
       tags:
         - Transaction Module
       summary: User's transaction API
       description: User's transactions from a specific account
       parameters:
-        - in: query
-          name: accountId
-          description: ID of the account
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
           required: true
-          type: integer
+          type: string
         - in: query
           name: month
-          description: Month of user's transaction (MM/YYYY)
+          description: Month of user's transaction (MM-YYYY)
           required: true
           type: string 
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: array
+            items: 
+              $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid account ID supplied
+        '404':
+          description: Account not found
+        '405':
+          description: Validation exception
+        '500':
+          description: Internal Server Error
+
+
+  /transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Update transaction
+      description: API for getting the user's transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: ID of the transaction
+          required: true
+          type: integer
       produces:
         - application/json
       responses:
@@ -171,37 +213,8 @@ paths:
           description: Validation exception
         '500':
           description: Internal Server Error
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Transaction Module
-      summary: Add transaction
-      description: API for adding the user's transaction
-      parameters:
-        - in: body
-          name: body
-          description: Add user transaction attributes
-          required: true  
-          schema:
-            $ref: '#/definitions/UpdateTransaction'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            $ref: '#/definitions/UpdateTransaction'
-        '400':
-          description: Invalid account ID supplied
-        '404':
-          description: Account not found
-        '405':
-          description: Validation exception
-        '500':
-          description: Internal Server Error
-  /transactions/{transactionId}:
-    put:
+
+    patch:
       security:
         - Bearer: []
       tags:
@@ -224,6 +237,7 @@ paths:
           description: Update user transaction attributes
           required: true  
           schema:
+            type: array
             $ref: '#/definitions/UpdateTransaction'
       produces:
         - application/json
@@ -240,47 +254,51 @@ paths:
           description: Validation exception
         '500':
           description: Internal Server Error
-    delete:
-      security:
-        - Bearer: []
-      tags:
-        - Transaction Module
-      summary: Delete transaction
-      description: API for deleting the user's transaction
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-          type: string
-        - in: path
-          name: transactionId
-          description: ID of the transaction
-          required: true
-          type: integer
-        - in: body
-          name: body
-          description: Delete user transaction attributes
-          required: true  
-          schema:
-            $ref: '#/definitions/DeleteTransaction'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            $ref: '#/definitions/DeleteTransaction'
-        '400':
-          description: Invalid account ID supplied
-        '404':
-          description: Account not found
-        '405':
-          description: Validation exception
-        '500':
-          description: Internal Server Error
-  
-  
+
+    
+    # put:
+    #   security:
+    #     - Bearer: []
+    #   tags:
+    #     - Transaction Module
+    #   summary: Update transaction
+    #   description: API for updating the user's transaction
+    #   parameters:
+    #     - in: header
+    #       name: Authorization
+    #       description: Attach Bearer JWT token
+    #       required: true
+    #       type: string
+    #     - in: path
+    #       name: transactionId
+    #       description: ID of the transaction
+    #       required: true
+    #       type: integer
+    #     - in: body
+    #       name: body
+    #       description: Update user transaction attributes
+    #       required: true  
+    #       schema:
+    #         type: array
+    #         $ref: '#/definitions/UpdateTransaction'
+    #   produces:
+    #     - application/json
+    #   responses:
+    #     '200':
+    #       description: Successful operation
+    #       schema:
+    #         $ref: '#/definitions/UpdateTransaction'
+    #     '400':
+    #       description: Invalid account ID supplied
+    #     '404':
+    #       description: Account not found
+    #     '405':
+    #       description: Validation exception
+    #     '500':
+    #       description: Internal Server Error
+
+    # /transactions/{transactionId}:
+
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -383,9 +401,9 @@ definitions:
   UpdateTransaction:
     type: object
     properties:
-      transactionId:
-        type: object
-        example: 'check01'
+      # transactionId:
+      #   type: object
+      #   example: 'check01'
       category: 
         type: object
         example: 'Sport'
