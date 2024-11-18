@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from "react-router-dom"
 
-import DashboardHeader from '../../components/DashboardHeader/DashboardHeader'
+import Header from '../../components/Header/Header'
 import TransactionHeader from '../../components/TransactionHeader/TransactionHeader'
 import TransactionDashboard from '../../components/TransactionDashboard/TransactionDashboard'
 import Footer from '../../components/Footer/Footer'
@@ -19,7 +19,7 @@ const AccountPage = () => {
 
     return (
         <div className='accountPageSection'>
-            <DashboardHeader />
+            <Header />
             <div className='accountInfos'>
                 <TransactionHeader accountId={accountId} />
                 <TransactionDashboard accountId={accountId} />
