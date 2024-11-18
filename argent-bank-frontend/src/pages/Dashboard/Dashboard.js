@@ -1,8 +1,9 @@
 import React from 'react'
 
-import DashboardHeader from '../../components/DashboardHeader/DashboardHeader'
 import DashboardAccount from '../../components/DashboardAccount/DashboardAccount'
 import Footer from '../../components/Footer/Footer'
+import Header from '../../components/Header/Header'
+
 
 import '../Dashboard/Dashboard.css'
 
@@ -12,13 +13,13 @@ import '../Dashboard/Dashboard.css'
  */
 
 const Dashboard = () => {
-    return (
-        <div className='dashboard'>
-            <DashboardHeader />
-            <DashboardAccount /> 
-            <Footer />
-        </div>
-    )    
+  return (
+    <div className='dashboard'>
+      <Header />
+      <DashboardAccount />
+      <Footer />
+    </div>
+  )
 }
 
 export default Dashboard
